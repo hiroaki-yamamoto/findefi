@@ -1,0 +1,63 @@
+CMake EFI package module readme
+================================
+What this document?
+This document is written about the way to install CMake EFI package module, and how to use the module.
+
+What is EFI?
+EFI is a file format to control UEFI and operating system.
+UEFI is called Unified Extensible Firmware Interface tha is an alternative of BIOS. 
+And also, UEFI is very simple operating system. For example, executing EFI files, 
+cd to fat filesystem, and it has file manipulation commands. The behavior is very similar to commandline based OS.
+EFI can control a lot of stuff. For example, executing EFI based operating system, table injection, and more...
+
+Why this module?
+Because writing Makefile is very boaring and spends a lot of time. If possible, you want to use automatic code generator like automake.
+CMake is similar to automake, but CMake is cross-platform and displays building progress. Of course, you can write 
+CMakeLists.txt (It corresponds to Makefile) faster than writing Makefile.
+
+Requirements
+You will need the following stuff to use this module.
+
+*)CMake
+    I recommend to use the latest version. At least, you want to use version 2.8.
+
+*)GCC
+    Both of GNU C and GNU C++ compiler is needed because EFI programming is possible if the API works. 
+    You can get them from (http://gcc.gnu.org/) or package administration system on your system.
+
+*)gnu-efi
+    This is an EFI SDK for GCC. you can get it from (http://gnu-efi.sourceforge.net/) or package administration system on your system.
+
+How to install the module
+1:Open your favorite terminal
+2:cd to the directory containing FindEfi.cmake.
+3:Type the following as root:
+    install -m644 FindEfi.cmake <CMake Module Path>
+
+You need to replace <CMake Module Path> to where *.cmake is. You can see "cmake" folder and "cmake-<version>" folder.
+In this case, you want to choose cmake-<version>.
+In the most case, the module path is /usr/share/$(cmake --version|sed -e 's@[a-z,A-Z, ]*@@g' -e 's@.[0-9]$@@g') .
+
+4:Congratulation! You have installed the module,
+
+Variable reference:
+EFI_INCLUDE_DIR     :Include directories.
+EFI_LIBRARIES       :Libraries.
+EFI_LINKER_FLAGS    :Linker flags.
+EFI_COMPILE_FLAGS   :Compile flags.
+
+Macros:
+create_efi(target):
+Creates an EFI file from so file created by add_library(target SHARED ...).
+Note that the parameter "target" must be the same as the name of the target that is specified by add_library.
+
+
+
+If you found bugs, please let me know. you will not get support about this module on upstream.
+
+==========================
+Hiroaki Yamamoto
+admin@hysoftware.net
+http://hysoftware.net/
+==========================
+
